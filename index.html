@@ -462,6 +462,37 @@
       letter-spacing: 0.08em;
     }
 
+    /* ===== GALLERY ===== */
+    .gallery { background: var(--cream-light); }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 12px;
+      margin-top: 40px;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.03); }
+
+    @media (max-width: 768px) {
+      .gallery-grid { columns: 2; }
+    }
+    @media (max-width: 480px) {
+      .gallery-grid { columns: 1; }
+    }
+
     /* ===== PRICE / CTA ===== */
     .cta-section { background: var(--cream-light); text-align: center; }
 
@@ -957,6 +988,23 @@
         <p class="quote-text">さーやんの表現あそびの時の子どもたちの笑顔が、いつも本当に目をキラキラさせて輝いていて、本当に楽しいってこういうことだなっていうのをこの1年感じてきました。子どもの参加率が100%なのは、さーやんの活動だけだと思う。さーやんとの活動が、うちの園の肝になっていた！</p>
         <span class="quote-attr">園長先生・保育士（さーやんのあそびのじかん）</span>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery">
+  <div class="section-inner">
+    <span class="section-label">研修の現場から</span>
+    <div class="divider"></div>
+    <h2 class="section-title">体験しながら、楽しく学ぶ<br>そんな時間をつくります</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="training1.jpg" alt="表現あそび研修の様子1" loading="lazy"></div>
+      <div class="gallery-item"><img src="training2.jpg" alt="表現あそび研修の様子2" loading="lazy"></div>
+      <div class="gallery-item"><img src="training3.jpg" alt="表現あそび研修の様子3" loading="lazy"></div>
+      <div class="gallery-item"><img src="training4.jpg" alt="表現あそび研修の様子4" loading="lazy"></div>
+      <div class="gallery-item"><img src="training5.jpg" alt="表現あそび研修の様子5" loading="lazy"></div>
+      <div class="gallery-item"><img src="training6.jpg" alt="表現あそび研修の様子6" loading="lazy"></div>
     </div>
   </div>
 </section>
