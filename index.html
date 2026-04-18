@@ -447,7 +447,7 @@
     /* ===== VOICE / QUOTE ===== */
     .quote-section {
       position: relative;
-      background: url('voices_bg.jpg') center 30% / 120% auto no-repeat;
+      background: url('voices_bg.jpg') center 30% / cover no-repeat fixed;
     }
 
     .quote-section::before {
@@ -498,7 +498,7 @@
 
     .quote-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
       margin-top: 24px;
     }
@@ -1121,6 +1121,18 @@
           <p class="quote-text">「うまくやらせなきゃ」という気持ちが、研修を受けてから「一緒に楽しもう」に変わりました。劇あそびの時間が、クラス全体で一番盛り上がる時間になっています。</p>
           <span class="quote-attr">幼稚園教諭</span>
         </div>
+        <div class="quote-card">
+          <p class="quote-text">表現が苦手でずっと避けてきましたが、「正解がない」という言葉がすごく刺さりました。研修の翌日から、子どもの「こうしたい！」に「いいね！」と言えるようになった気がします。</p>
+          <span class="quote-attr">保育士</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">職員みんなで体を動かして笑い合う時間が、こんなに職場の雰囲気を変えるとは思いませんでした。研修後、先生たち同士の会話が増えて、チームとしての一体感が生まれました。</p>
+          <span class="quote-attr">主任保育士</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">発表会の準備が「こなす作業」から「楽しいプロセス」に変わりました。子どもたちのアイデアを引き出しながら一緒につくっていく感覚が、こんなに楽しいものだとは思っていませんでした。</p>
+          <span class="quote-attr">保育士</span>
+        </div>
       </div>
     </div>
 
@@ -1137,6 +1149,14 @@
         </div>
         <div class="quote-card">
           <p class="quote-text">活動後、子どもたちが自分たちで「続きをやろう！」と始めるようになりました。さーやんのあそびが、子どもたちの中でしっかり根付いているのを感じています。</p>
+          <span class="quote-attr">保育士</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">先生たちも一緒に楽しんでいる姿を見て、子どもたちがどんどん安心して表現できるようになっていきました。「先生が楽しそう」って、子どもにとって一番の許可なんだなと感じました。</p>
+          <span class="quote-attr">園長先生</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">活動の中で、子どもたちが自分の気持ちを言葉や体で表現しようとする場面がたくさん見られました。普段の保育では引き出せない部分を、さーやんが自然に引き出してくれています。</p>
           <span class="quote-attr">保育士</span>
         </div>
       </div>
@@ -1156,6 +1176,18 @@
         <div class="quote-card">
           <p class="quote-text">感情に名前をつけることで、自分の状態を客観的に見られるようになりました。しんどいときに「今日はこういう気持ちなんだな」と受け入れられるようになり、気持ちの切り替えが早くなりました。</p>
           <span class="quote-attr">保育士</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">「頑張りすぎてしまう自分」を否定せずに認めてもらえた感覚がありました。泣いてしまう先生もいたけど、泣くことも大事なんだと感じられる温かい場でした。</p>
+          <span class="quote-attr">保育士</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">保育士として子どもに寄り添うためには、自分自身の心が安定していることが大切だとあらためて実感しました。先生が安心していると、子どもたちも穏やかでいられる。研修を受けてよかったです。</p>
+          <span class="quote-attr">保育士</span>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">職員間で「最近しんどいよね」と話せる空気が生まれました。メンタルヘルスの話をタブーにしないで、お互いを支え合える職場になってきていると感じています。</p>
+          <span class="quote-attr">主任保育士</span>
         </div>
       </div>
     </div>
@@ -1313,6 +1345,21 @@
   }
 
   setTimeout(crossfade, HOLD_MS);
+})();
+
+// パララックス（iOS Safari は fixed 非対応のためJS補完）
+(function() {
+  var qs = document.querySelector('.quote-section');
+  if (!qs) return;
+  var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
+  if (isIOS) {
+    qs.style.backgroundAttachment = 'scroll';
+    window.addEventListener('scroll', function() {
+      var rect = qs.getBoundingClientRect();
+      var offset = -rect.top * 0.25;
+      qs.style.backgroundPosition = 'center calc(30% + ' + offset + 'px)';
+    }, { passive: true });
+  }
 })();
 
 // 参加者の声タブ
