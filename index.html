@@ -1171,26 +1171,32 @@
 
 <script>
 (function () {
+  // src: ファイル名, pos: object-position（上下調整）
   const SOURCES = [
-    'hero1.mp4',
-    'hero2.mp4',
-    'hero3.mp4'
+    { src: 'hero1.mp4', pos: 'center center' },
+    { src: 'hero2.mp4', pos: 'center 70%' },
+    { src: 'hero3.mp4', pos: 'center center' }
   ];
-  const FADE_MS = 1500;   // フェード時間（ms）
-  const HOLD_MS = 8000;   // 1本あたりの表示時間（ms）
+  const FADE_MS = 1500;
+  const HOLD_MS = 8000;
 
   const vids = document.querySelectorAll('.hero-vid');
 
+  function applySource(vid, s) {
+    vid.src = s.src;
+    vid.style.objectPosition = s.pos || 'center center';
+  }
+
   if (SOURCES.length === 1) {
-    vids[0].src = SOURCES[0];
+    applySource(vids[0], SOURCES[0]);
     vids[0].loop = true;
     vids[0].play();
     return;
   }
 
   let idx = 0;
-  vids[0].src = SOURCES[0];
-  vids[1].src = SOURCES[1 % SOURCES.length];
+  applySource(vids[0], SOURCES[0]);
+  applySource(vids[1], SOURCES[1 % SOURCES.length]);
   vids[0].play();
   vids[1].load();
 
@@ -1207,7 +1213,7 @@
       setTimeout(function () {
         vids[a].pause();
         vids[a].currentTime = 0;
-        vids[a].src = SOURCES[(idx + 1) % SOURCES.length];
+        applySource(vids[a], SOURCES[(idx + 1) % SOURCES.length]);
         vids[a].load();
       }, FADE_MS);
     }, 50);
