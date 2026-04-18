@@ -561,6 +561,31 @@
     /* ===== GALLERY ===== */
     .gallery { background: var(--cream-light); }
 
+    .gallery-category {
+      margin-top: 48px;
+    }
+
+    .gallery-category-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+
+    .gallery-category:nth-child(1) .gallery-category-label { background: rgba(246,166,35,0.15); color: #c47a00; }
+    .gallery-category:nth-child(2) .gallery-category-label { background: rgba(57,197,134,0.15); color: var(--green-dark); }
+    .gallery-category:nth-child(3) .gallery-category-label { background: rgba(62,193,201,0.15); color: var(--teal-dark); }
+
+    .gallery-category-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+    }
+
     .gallery-grid {
       columns: 3;
       column-gap: 12px;
@@ -1129,17 +1154,39 @@
     <span class="section-label">研修の現場から</span>
     <div class="divider"></div>
     <h2 class="section-title">体験しながら、楽しく学ぶ<br>そんな時間をつくります</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item"><img src="0109.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
-      <div class="gallery-item"><img src="0115.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
-      <div class="gallery-item"><img src="training3.jpg" alt="表現あそび研修の様子3" loading="lazy"></div>
-      <div class="gallery-item"><img src="training4.jpg" alt="表現あそび研修の様子4" loading="lazy"></div>
-      <div class="gallery-item"><img src="training5.jpg" alt="表現あそび研修の様子5" loading="lazy"></div>
-      <div class="gallery-item"><img src="training6.jpg" alt="表現あそび研修の様子6" loading="lazy"></div>
-      <div class="gallery-item"><img src="mental2.jpg" alt="メンタルヘルス研修の様子1" loading="lazy"></div>
-      <div class="gallery-item"><img src="mental3.jpg" alt="メンタルヘルス研修の様子2" loading="lazy"></div>
-      <div class="gallery-item"><img src="mental4.jpg" alt="メンタルヘルス研修の様子3" loading="lazy"></div>
-      <div class="gallery-item"><img src="mental5.jpg" alt="メンタルヘルス研修の様子4" loading="lazy"></div>
+    <!-- さーやんのあそびのじかん -->
+    <div class="gallery-category">
+      <span class="gallery-category-label">🌱 さーやんのあそびのじかん</span>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="play1.jpg" alt="あそびのじかんの様子1" loading="lazy"></div>
+        <div class="gallery-item"><img src="play2.jpg" alt="あそびのじかんの様子2" loading="lazy"></div>
+        <div class="gallery-item"><img src="play3.jpg" alt="あそびのじかんの様子3" loading="lazy"></div>
+        <div class="gallery-item"><img src="play4.jpg" alt="あそびのじかんの様子4" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- 表現あそび研修 -->
+    <div class="gallery-category">
+      <span class="gallery-category-label">🎭 表現あそび研修</span>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="0109.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="0115.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="training3.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="training4.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="training5.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="training6.jpg" alt="表現あそび研修の様子" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- メンタルヘルス研修 -->
+    <div class="gallery-category">
+      <span class="gallery-category-label">💚 メンタルヘルス研修</span>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="mental2.jpg" alt="メンタルヘルス研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="mental3.jpg" alt="メンタルヘルス研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="mental4.jpg" alt="メンタルヘルス研修の様子" loading="lazy"></div>
+        <div class="gallery-item"><img src="mental5.jpg" alt="メンタルヘルス研修の様子" loading="lazy"></div>
+      </div>
     </div>
   </div>
 </section>
