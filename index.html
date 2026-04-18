@@ -47,14 +47,25 @@
       justify-content: center;
     }
 
-    .hero-bg {
+    .hero-videos {
       position: absolute;
       inset: 0;
-      background-image: url('sayan_hero.jpg');
-      background-size: cover;
-      background-position: center 20%;
       filter: saturate(0.65) brightness(0.82);
+      overflow: hidden;
     }
+
+    .hero-vid {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .hero-vid.active { opacity: 1; }
 
     .hero-overlay {
       position: absolute;
@@ -854,7 +865,10 @@
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-videos">
+    <video class="hero-vid active" autoplay muted playsinline></video>
+    <video class="hero-vid" muted playsinline></video>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <span class="hero-badge">表現あそび × コミュニケーション研修</span>
@@ -1154,6 +1168,55 @@
   <a href="mailto:sayan.gekiasobi@gmail.com" class="footer-cta">お問い合わせはこちら</a>
   <p class="footer-copy">© 2024 Sayaka Nishiwaki. All rights reserved.</p>
 </footer>
+
+<script>
+(function () {
+  const SOURCES = [
+    'hero1.mp4'
+    // 追加する動画はここに 'hero2.mp4', 'hero3.mp4' と足す
+  ];
+  const FADE_MS = 1500;   // フェード時間（ms）
+  const HOLD_MS = 8000;   // 1本あたりの表示時間（ms）
+
+  const vids = document.querySelectorAll('.hero-vid');
+
+  if (SOURCES.length === 1) {
+    vids[0].src = SOURCES[0];
+    vids[0].loop = true;
+    vids[0].play();
+    return;
+  }
+
+  let idx = 0;
+  vids[0].src = SOURCES[0];
+  vids[1].src = SOURCES[1 % SOURCES.length];
+  vids[0].play();
+  vids[1].load();
+
+  function crossfade() {
+    const a = idx % 2;
+    const b = (idx + 1) % 2;
+    idx++;
+
+    vids[b].play();
+    vids[b].classList.add('active');
+
+    setTimeout(function () {
+      vids[a].classList.remove('active');
+      setTimeout(function () {
+        vids[a].pause();
+        vids[a].currentTime = 0;
+        vids[a].src = SOURCES[(idx + 1) % SOURCES.length];
+        vids[a].load();
+      }, FADE_MS);
+    }, 50);
+
+    setTimeout(crossfade, HOLD_MS);
+  }
+
+  setTimeout(crossfade, HOLD_MS);
+})();
+</script>
 
 </body>
 </html>
