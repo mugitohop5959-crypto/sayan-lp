@@ -1186,6 +1186,7 @@
   function applySource(vid, s) {
     vid.src = s.src;
     vid.style.objectPosition = s.pos || 'center center';
+    vid.loop = true;
   }
 
   if (SOURCES.length === 1) {
