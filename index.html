@@ -408,17 +408,26 @@
     .pillar-block:nth-child(3) .pillar-tag { background: rgba(62,193,201,0.15); color: var(--teal-dark); }
 
     .pillar-photos {
-      padding: 16px 24px 20px;
+      padding: 16px 0 20px;
       background: var(--cream-light);
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(0,0,0,0.15) transparent;
+      overflow: hidden;
     }
 
-    .pillar-photos::-webkit-scrollbar { height: 4px; }
-    .pillar-photos::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+    .pillar-photos-track {
+      display: flex;
+      gap: 10px;
+      width: max-content;
+      animation: marquee-left 24s linear infinite;
+    }
+
+    .pillar-photos:hover .pillar-photos-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes marquee-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
 
     .pillar-photo-item {
       flex-shrink: 0;
@@ -441,7 +450,7 @@
     @media (max-width: 768px) {
       .pillar-head { padding: 20px; gap: 14px; }
       .pillar-body { padding: 14px 20px 18px; }
-      .pillar-photos { padding: 12px 16px 16px; }
+      .pillar-photos { padding: 12px 0 16px; }
       .pillar-photo-item { width: 160px; height: 130px; }
     }
 
@@ -1435,6 +1444,15 @@
 
   setTimeout(crossfade, HOLD_MS);
 })();
+
+// 研修内容写真マーキー（無限左スクロール）
+document.querySelectorAll('.pillar-photos').forEach(function(container) {
+  var track = document.createElement('div');
+  track.className = 'pillar-photos-track';
+  while (container.firstChild) { track.appendChild(container.firstChild); }
+  track.innerHTML += track.innerHTML; // 複製してシームレスループ
+  container.appendChild(track);
+});
 
 // パララックス（iOS Safari は fixed 非対応のためJS補完）
 (function() {
