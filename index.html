@@ -272,7 +272,19 @@
     }
 
     /* ===== BENEFITS ===== */
-    .benefits { background: linear-gradient(160deg, #edfaf4 0%, #e6f9fc 100%); }
+    .benefits {
+      position: relative;
+      background: url('benefits_bg.jpg') center 40% / cover no-repeat fixed;
+    }
+
+    .benefits::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(237,250,244,0.88) 0%, rgba(230,249,252,0.88) 100%);
+    }
+
+    .benefits .section-inner { position: relative; z-index: 1; }
 
     .benefits-grid {
       display: grid;
