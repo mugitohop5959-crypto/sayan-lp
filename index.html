@@ -140,6 +140,36 @@
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
+    .btn-primary {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -75%;
+      width: 50%;
+      height: 200%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.55) 50%,
+        transparent 100%
+      );
+      transform: skewX(-20deg);
+      animation: kiran 2.8s ease-in-out infinite;
+    }
+
+    @keyframes kiran {
+      0%   { left: -75%; opacity: 0; }
+      10%  { opacity: 1; }
+      40%  { left: 130%; opacity: 1; }
+      41%  { opacity: 0; }
+      100% { left: 130%; opacity: 0; }
+    }
+
     .btn-primary:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 32px rgba(246,166,35,0.5);
