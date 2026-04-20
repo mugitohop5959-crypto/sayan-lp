@@ -448,9 +448,14 @@
       gap: 10px;
       width: max-content;
       animation: marquee-left 24s linear infinite;
+      animation-play-state: paused;
     }
 
-    .pillar-photos:hover .pillar-photos-track {
+    .pillar-photos.in-view .pillar-photos-track {
+      animation-play-state: running;
+    }
+
+    .pillar-photos.in-view:hover .pillar-photos-track {
       animation-play-state: paused;
     }
 
@@ -1066,7 +1071,7 @@
           
           <div class="pillar-head-content">
             <h4>表現あそび研修</h4>
-            <p>「表現あそび」を体験することを通して、先生自身が「表現すること」を楽しむ体験型研修です。<br>表現はコミュニケーション！<br>先生自身が「受け取り」「伝える」楽しさを味わうと、子どもたちへの関わり方が自然と変わっていきます。</p>
+            <p>誰でもできる簡単な「表現あそび」から始め、先生自身が「表現すること」を楽しむ体験型の研修です。<br>表現はコミュニケーション！<br>先生が「受け取り」「伝える」楽しさを味わうと、子どもたちへの関わり方が自然と変わっていきます。</p>
           </div>
         </div>
         <div class="pillar-body">
@@ -1477,13 +1482,27 @@
   setTimeout(crossfade, HOLD_MS);
 })();
 
-// 研修内容写真マーキー（無限左スクロール）
+// 研修内容写真マーキー（無限左スクロール・表示中のみ再生）
 document.querySelectorAll('.pillar-photos').forEach(function(container) {
   var track = document.createElement('div');
   track.className = 'pillar-photos-track';
   while (container.firstChild) { track.appendChild(container.firstChild); }
-  track.innerHTML += track.innerHTML; // 複製してシームレスループ
+  track.innerHTML += track.innerHTML;
   container.appendChild(track);
+});
+
+var photoObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+    } else {
+      entry.target.classList.remove('in-view');
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.pillar-photos').forEach(function(el) {
+  photoObserver.observe(el);
 });
 
 // パララックス（iOS Safari は fixed 非対応のためJS補完）
