@@ -110,23 +110,30 @@
     }
 
     .hero-title {
-      font-size: clamp(3.5rem, 11vw, 9rem);
+      font-size: clamp(4.5rem, 14vw, 12rem);
       font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 24px;
+      line-height: 1.15;
+      margin-bottom: 28px;
       letter-spacing: 0.06em;
-      background: linear-gradient(135deg, #fff 0%, #ffe98a 50%, #ffb347 100%);
+      background: linear-gradient(135deg, #fff 0%, #ffe98a 45%, #ffb347 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       text-shadow: none;
-      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.35));
-      animation: titlePop 0.7s cubic-bezier(0.22,1,0.36,1) both;
+      animation: titleBounce 1s cubic-bezier(0.22,1,0.36,1) both, titleGlow 3.5s ease-in-out 1.2s infinite;
     }
 
-    @keyframes titlePop {
-      from { opacity: 0; transform: translateY(20px) scale(0.95); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+    @keyframes titleBounce {
+      0%   { opacity: 0; transform: translateY(-80px) scale(0.75) rotate(-4deg); filter: drop-shadow(0 4px 16px rgba(0,0,0,0.2)); }
+      55%  { opacity: 1; transform: translateY(14px) scale(1.04) rotate(1.5deg); }
+      75%  { transform: translateY(-6px) scale(0.98) rotate(-0.5deg); }
+      90%  { transform: translateY(3px) scale(1.01); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); filter: drop-shadow(0 4px 20px rgba(0,0,0,0.35)); }
+    }
+
+    @keyframes titleGlow {
+      0%, 100% { filter: drop-shadow(0 4px 20px rgba(0,0,0,0.35)); }
+      50%       { filter: drop-shadow(0 4px 32px rgba(255,200,80,0.7)) drop-shadow(0 0 20px rgba(255,160,50,0.4)); }
     }
 
     .hero-title em {
