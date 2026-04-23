@@ -265,39 +265,35 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       z-index: 2;
       color: rgba(255,255,255,0.7);
       font-size: 0.62rem;
       letter-spacing: 0.18em;
     }
 
-    .scroll-chevrons {
+    .scroll-dots {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 2px;
+      gap: 7px;
     }
 
-    .scroll-chevrons span {
+    .scroll-dots span {
       display: block;
-      width: 14px;
-      height: 14px;
-      border-right: 2.5px solid rgba(255,255,255,0.85);
-      border-bottom: 2.5px solid rgba(255,255,255,0.85);
-      transform: rotate(45deg);
-      opacity: 0;
-      animation: chevronLight 1.4s ease-in-out infinite;
+      width: 7px;
+      height: 7px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      animation: dotBounce 1.4s ease-in-out infinite;
     }
 
-    .scroll-chevrons span:nth-child(1) { animation-delay: 0s; }
-    .scroll-chevrons span:nth-child(2) { animation-delay: 0.25s; }
-    .scroll-chevrons span:nth-child(3) { animation-delay: 0.5s; }
+    .scroll-dots span:nth-child(1) { animation-delay: 0s; }
+    .scroll-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .scroll-dots span:nth-child(3) { animation-delay: 0.4s; }
 
-    @keyframes chevronLight {
-      0%        { opacity: 0; }
-      30%, 60%  { opacity: 1; }
-      100%      { opacity: 0; }
+    @keyframes dotBounce {
+      0%, 100% { transform: translateY(0);    opacity: 0.5; }
+      50%       { transform: translateY(-8px); opacity: 1; }
     }
 
     /* ===== SECTION BASE ===== */
@@ -1073,7 +1069,7 @@
     <a href="mailto:sayan.gekiasobi@gmail.com" class="btn-primary">まずはお気軽にご相談ください →</a>
   </div>
   <div class="scroll-hint">
-    <div class="scroll-chevrons">
+    <div class="scroll-dots">
       <span></span><span></span><span></span>
     </div>
     scroll
