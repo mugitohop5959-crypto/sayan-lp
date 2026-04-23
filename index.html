@@ -327,15 +327,28 @@
     .title-pop {
       display: inline-block;
       font-size: 1.25em;
-      color: var(--green-dark);
-      animation: titlePopWiggle 3s ease-in-out 0.5s infinite;
+      background: linear-gradient(
+        90deg,
+        var(--green-dark) 0%,
+        var(--green-dark) 25%,
+        #c8ffe0 48%,
+        #ffffff 50%,
+        #c8ffe0 52%,
+        var(--green-dark) 75%,
+        var(--green-dark) 100%
+      );
+      background-size: 250% 100%;
+      background-position: 150% center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 3s ease-in-out 1s infinite;
     }
 
-    @keyframes titlePopWiggle {
-      0%   { color: var(--green-dark); }
-      33%  { color: #7bc67e; }
-      66%  { color: #2ecc71; }
-      100% { color: var(--green-dark); }
+    @keyframes titleShimmer {
+      0%   { background-position: 150% center; }
+      60%  { background-position: -50% center; }
+      100% { background-position: -50% center; }
     }
 
     .section-desc {
