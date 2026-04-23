@@ -140,23 +140,31 @@
       font-weight: 900;
       color: #fff;
       letter-spacing: 0.04em;
-      line-height: 1.8;
+      line-height: 2;
       margin-bottom: 16px;
-      display: inline-block;
-      position: relative;
-      padding: 2px 6px;
+      display: block;
       animation: fadeSlideUp 0.8s 0.5s both;
     }
 
-    .hero-catchcopy::before {
+    .hero-catchcopy .marker-line {
+      display: inline;
+      position: relative;
+      padding: 2px 4px;
+    }
+
+    .hero-catchcopy .marker-line::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255, 220, 60, 0.45);
+      background: rgba(60, 190, 90, 0.5);
       border-radius: 3px;
       transform: scaleX(0);
       transform-origin: left;
-      animation: markerDraw 0.7s cubic-bezier(0.4,0,0.2,1) 1.2s forwards;
+      animation: markerDraw 1.8s cubic-bezier(0.25,0.1,0.25,1) 1.2s forwards;
+    }
+
+    .hero-catchcopy .marker-line.delay::before {
+      animation-delay: 3.2s;
     }
 
     @keyframes markerDraw {
@@ -1026,7 +1034,7 @@
   <div class="hero-inner">
     <span class="hero-badge">表現 × コミュニケーション研修</span>
     <h1 class="hero-title">さーやんの<br>園内研修</h1>
-    <p class="hero-catchcopy">子どもの「やってみたい！」が動き出す保育へ</p>
+    <p class="hero-catchcopy"><span class="marker-line">子どもの「やってみたい！」が</span><br><span class="marker-line delay">動き出す保育へ</span></p>
     <p class="hero-sub">
       「受け取り」「伝える」楽しさから始まる<br>
       表現あそびとコミュニケーションを<br>
