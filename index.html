@@ -272,23 +272,32 @@
       letter-spacing: 0.18em;
     }
 
-    .scroll-hint svg {
-      animation: handArrowBounce 2s ease-in-out infinite;
-      overflow: visible;
+    .scroll-chevrons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
     }
 
-    @keyframes handArrowDraw {
-      to { stroke-dashoffset: 0; }
+    .scroll-chevrons span {
+      display: block;
+      width: 14px;
+      height: 14px;
+      border-right: 2.5px solid rgba(255,255,255,0.85);
+      border-bottom: 2.5px solid rgba(255,255,255,0.85);
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: chevronLight 1.4s ease-in-out infinite;
     }
 
-    @keyframes handArrowBounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(5px); }
-    }
+    .scroll-chevrons span:nth-child(1) { animation-delay: 0s; }
+    .scroll-chevrons span:nth-child(2) { animation-delay: 0.25s; }
+    .scroll-chevrons span:nth-child(3) { animation-delay: 0.5s; }
 
-    @keyframes handArrowFade {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.5; }
+    @keyframes chevronLight {
+      0%        { opacity: 0; }
+      30%, 60%  { opacity: 1; }
+      100%      { opacity: 0; }
     }
 
     /* ===== SECTION BASE ===== */
@@ -1064,10 +1073,9 @@
     <a href="mailto:sayan.gekiasobi@gmail.com" class="btn-primary">まずはお気軽にご相談ください →</a>
   </div>
   <div class="scroll-hint">
-    <svg width="30" height="48" viewBox="0 0 30 48" fill="none">
-      <path d="M15 2 C17 10, 11 20, 15 36" stroke="rgba(255,255,255,0.85)" stroke-width="2.2" stroke-linecap="round" fill="none" stroke-dasharray="50" stroke-dashoffset="50" style="animation: handArrowDraw 1s ease-out 0.2s forwards"/>
-      <path d="M8 30 L15 42 L22 30" stroke="rgba(255,255,255,0.85)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none" stroke-dasharray="30" stroke-dashoffset="30" style="animation: handArrowDraw 0.5s ease-out 1s forwards"/>
-    </svg>
+    <div class="scroll-chevrons">
+      <span></span><span></span><span></span>
+    </div>
     scroll
   </div>
 </section>
