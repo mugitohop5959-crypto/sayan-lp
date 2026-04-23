@@ -332,9 +332,8 @@
     }
 
     @keyframes titlePopWiggle {
-      0%, 100% { transform: rotate(-1deg) scale(1); }
-      30%       { transform: rotate(1deg) scale(1.04); }
-      60%       { transform: rotate(-0.5deg) scale(1.02); }
+      0%, 100% { filter: brightness(1); }
+      50%       { filter: brightness(1.5) drop-shadow(0 0 8px rgba(47,178,122,0.7)); }
     }
 
     .section-desc {
