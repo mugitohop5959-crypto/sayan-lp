@@ -885,7 +885,18 @@
 
     .btn-cta {
       display: inline-block;
-      background: linear-gradient(90deg, var(--orange), var(--orange-light));
+      background: linear-gradient(
+        90deg,
+        var(--orange) 0%,
+        var(--orange) 20%,
+        #ffe09a 45%,
+        #ffffff 50%,
+        #ffe09a 55%,
+        var(--orange-light) 80%,
+        var(--orange-light) 100%
+      );
+      background-size: 250% 100%;
+      background-position: 150% center;
       color: #fff;
       font-size: 1.05rem;
       font-weight: 700;
@@ -896,6 +907,13 @@
       box-shadow: 0 8px 30px rgba(246,166,35,0.45);
       transition: transform 0.2s, box-shadow 0.2s;
       margin-bottom: 14px;
+      animation: btnShimmer 3s ease-in-out 1s infinite;
+    }
+
+    @keyframes btnShimmer {
+      0%   { background-position: 150% center; }
+      55%  { background-position: -50% center; }
+      100% { background-position: -50% center; }
     }
 
     .btn-cta:hover {
