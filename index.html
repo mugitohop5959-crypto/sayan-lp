@@ -324,6 +324,22 @@
       color: var(--text-dark);
     }
 
+    .title-pop {
+      display: inline-block;
+      font-size: 1.25em;
+      background: linear-gradient(135deg, var(--green) 0%, #2ecc71 50%, #27ae60 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titlePopWiggle 3s ease-in-out 0.5s infinite;
+    }
+
+    @keyframes titlePopWiggle {
+      0%, 100% { transform: rotate(-1deg) scale(1); }
+      30%       { transform: rotate(1deg) scale(1.04); }
+      60%       { transform: rotate(-0.5deg) scale(1.02); }
+    }
+
     .section-desc {
       font-size: 1rem;
       color: var(--text-mid);
@@ -1194,7 +1210,7 @@
   <div class="section-inner">
     <span class="section-label">研修内容について</span>
     <div class="divider"></div>
-    <h2 class="section-title">「表現」はコミュニケーション<br>「受け取り」「伝える」ことを楽しんでみませんか</h2>
+    <h2 class="section-title"><span class="title-pop">「表現」はコミュニケーション</span><br>「受け取り」「伝える」ことを楽しんでみませんか</h2>
     <p class="section-desc">
       1回の単発研修から、年間を通じた継続的なサポートまで。<br>
       園の状況やご要望に合わせて、柔軟にプログラムをご提案します。
