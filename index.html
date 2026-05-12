@@ -380,23 +380,29 @@
     /* ===== PROBLEMS ===== */
     .problems { background: var(--white); position: relative; }
 
+    /* ミニさーやん 行進レーン */
+    .mini-sayan-stage {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      margin: 8px 0 28px;
+    }
+
     .mini-sayan-wrap {
       position: absolute;
-      right: 28px;
-      top: 32px;
-      width: 120px;
-      animation: miniSayanWalk 1.8s ease-in-out infinite;
+      bottom: 0;
+      left: 100%;
+      width: 88px;
       pointer-events: none;
-      z-index: 3;
+      animation: miniSayanMarch 10s linear infinite;
     }
 
     .mini-sayan-wrap video  { display: none; }
     .mini-sayan-wrap canvas { width: 100%; display: block; }
 
-    @keyframes miniSayanWalk {
-      0%, 100% { transform: translateY(0) scale(1); }
-      30%       { transform: translateY(-8px) scale(1.02); }
-      70%       { transform: translateY(-4px) scale(1.01); }
+    @keyframes miniSayanMarch {
+      from { transform: translateX(10px); }
+      to   { transform: translateX(calc(-100% - 100vw)); }
     }
 
     .problems-grid {
@@ -1121,8 +1127,6 @@
 
       .hero-inner { padding: 0 20px; }
 
-      /* mini-sayan: モバイルで少し小さく */
-      .mini-sayan-wrap { width: 86px; right: 12px; top: 20px; }
 
       /* quote-grid のみ1列に（problems/benefitsは2列維持） */
       .quote-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -1171,8 +1175,6 @@
       .problems-grid,
       .benefits-grid { grid-template-columns: 1fr; gap: 14px; }
 
-      /* mini-sayan: さらに小さく */
-      .mini-sayan-wrap { width: 68px; right: 8px; top: 14px; }
 
 
       /* 問題カード */
@@ -1224,15 +1226,17 @@
 
 <!-- ===== PROBLEMS ===== -->
 <section class="problems">
-  <div class="mini-sayan-wrap">
-    <video class="sayan-vid" autoplay muted loop playsinline>
-      <source src="mini-sayan.mp4" type="video/mp4">
-    </video>
-    <canvas class="sayan-canvas"></canvas>
-  </div>
   <div class="section-inner">
     <span class="section-label">こんなお悩みはありませんか？</span>
     <div class="divider"></div>
+    <div class="mini-sayan-stage">
+      <div class="mini-sayan-wrap">
+        <video class="sayan-vid" autoplay muted loop playsinline>
+          <source src="mini-sayan.mp4" type="video/mp4">
+        </video>
+        <canvas class="sayan-canvas"></canvas>
+      </div>
+    </div>
     <h2 class="section-title">子どもたちの<br>自由な表現を引き出したい！<br>でも<br>どうしたらいいのか わからない</h2>
     <p class="section-desc">
       保育の中で「絵画」や「造形」は楽しめるけれど、発表会や劇あそびの季節になると、どこかモヤモヤする気持ちを抱えていませんか？<br><br>
