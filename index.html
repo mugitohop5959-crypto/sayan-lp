@@ -383,16 +383,16 @@
     /* ミニさーやん 行進レーン */
     .mini-sayan-stage {
       position: relative;
-      height: 150px;
+      height: 180px;
       overflow: hidden;
-      margin: 8px 0 28px;
+      margin: 4px 0 8px;
     }
 
     .mini-sayan-wrap {
       position: absolute;
       bottom: 0;
       left: 100%;
-      width: 88px;
+      width: 120px;
       pointer-events: none;
       animation: miniSayanMarch 10s linear infinite;
     }
@@ -400,10 +400,10 @@
     .mini-sayan-wrap video  { display: none; }
     .mini-sayan-wrap canvas { width: 100%; display: block; }
 
-    /* PC: ミニさーやんを大きく */
+    /* PC: ミニさーやんをさらに大きく */
     @media (min-width: 769px) {
-      .mini-sayan-wrap { width: 130px; }
-      .mini-sayan-stage { height: 200px; }
+      .mini-sayan-wrap { width: 175px; }
+      .mini-sayan-stage { height: 270px; }
     }
 
     @keyframes miniSayanMarch {
@@ -1790,7 +1790,7 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
     var stageW  = stage.offsetWidth;
     var charW   = wrap.offsetWidth || 88;
     var travel  = stageW + charW + 20; // 右端〜左端の移動距離(px)
-    var speed   = window.innerWidth >= 768 ? 55 : 90; // PC: ゆっくり 55px/s、スマホ: 90px/s
+    var speed   = window.innerWidth >= 768 ? 55 : 65; // PC: 55px/s、スマホ: ゆっくり65px/s
     wrap.style.animationDuration = (travel / speed).toFixed(1) + 's';
   }
   setMarchSpeed();
