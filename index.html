@@ -1109,32 +1109,87 @@
     }
 
     /* ===== RESPONSIVE ===== */
+
+    /* ── タブレット横 (〜1024px): グリッドを2列に ── */
+    @media (max-width: 1024px) {
+      .problems-grid,
+      .benefits-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+
+    /* ── タブレット縦・スマホ (〜768px) ── */
     @media (max-width: 768px) {
       section { padding: 64px 20px; }
 
-      .hero-inner {
-        padding: 0 20px;
-      }
+      .hero-inner { padding: 0 20px; }
 
-      .problems-grid,
-      .benefits-grid,
+      /* mini-sayan: モバイルで少し小さく・位置を上に */
+      .mini-sayan-wrap { width: 78px; right: 12px; top: 20px; }
+
+      /* quote-grid のみ1列に（problems/benefitsは2列維持） */
       .quote-grid { grid-template-columns: 1fr; gap: 16px; }
+      .flow-grid  { grid-template-columns: 1fr; }
 
-      .flow-grid { grid-template-columns: 1fr; }
+      /* プロフィール */
+      .profile-inner       { grid-template-columns: 1fr; gap: 40px; }
+      .profile-image-wrap  { max-width: 220px; margin: 0 auto; }
+      .profile-years       { grid-template-columns: repeat(2, 1fr); }
 
-      .profile-inner { grid-template-columns: 1fr; gap: 40px; }
-
-      .profile-image-wrap { max-width: 220px; margin: 0 auto; }
-
+      /* 料金カード */
       .price-card { padding: 36px 24px; }
 
-      .profile-years { grid-template-columns: repeat(2, 1fr); }
+      /* ボタン: 横幅いっぱいでタップしやすく */
+      .btn-primary { display: block; text-align: center; }
+      .btn-cta     { display: block; text-align: center; padding: 20px 32px; }
 
+      /* iOS Safari: background-attachment:fixed 非対応のためscrollに */
+      .benefits      { background-attachment: scroll; }
+      .quote-section { background-attachment: scroll; }
+
+      /* ボイスタブ */
+      .voice-tabs { gap: 8px; }
+      .voice-tab  { font-size: 0.78rem; padding: 8px 14px; }
+
+      /* サービスノート */
+      .service-note { padding: 18px 20px; }
+
+      /* 研修内容ブロック */
+      .pillar-head { padding: 20px; gap: 14px; }
+      .pillar-body { padding: 14px 20px 18px; }
+      .pillar-photos { padding: 12px 0 16px; }
+      .pillar-photo-item { width: 160px; height: 130px; }
+
+      /* フッター */
+      .footer-sns { flex-wrap: wrap; gap: 10px; }
     }
 
+    /* ── スマホ小 (〜480px) ── */
     @media (max-width: 480px) {
-      .section-title { font-size: 1.35rem; }
-      .btn-cta { padding: 18px 36px; font-size: 0.95rem; }
+      section { padding: 56px 16px; }
+
+      .section-title { font-size: 1.3rem; }
+
+      /* グリッド: 小画面では1列に */
+      .problems-grid,
+      .benefits-grid { grid-template-columns: 1fr; gap: 14px; }
+
+      /* mini-sayan: さらに小さく */
+      .mini-sayan-wrap { width: 62px; right: 8px; top: 14px; }
+
+      /* 問題カード */
+      .problem-card { padding: 24px 20px; }
+
+      /* 料金カード */
+      .price-card { padding: 28px 16px; }
+
+      /* ボタン */
+      .btn-cta { padding: 18px 20px; font-size: 0.92rem; }
+
+      /* プロフィール数字 */
+      .year-item { padding: 12px 14px; }
+      .year-num  { font-size: 1.5rem; }
+
+      /* ボイスタブ: 折り返しやすく */
+      .voice-tab { font-size: 0.74rem; padding: 7px 12px; }
     }
   </style>
 </head>
@@ -1686,19 +1741,30 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
   photoObserver.observe(el);
 });
 
-// パララックス（iOS Safari は fixed 非対応のためJS補完）
+// パララックス（iOS Safari / モバイルは background-attachment:fixed 非対応のためJS補完 or 無効化）
 (function() {
-  var qs = document.querySelector('.quote-section');
-  if (!qs) return;
-  var isIOS = /iP(hone|ad|od)/.test(navigator.userAgent);
-  if (isIOS) {
-    qs.style.backgroundAttachment = 'scroll';
-    window.addEventListener('scroll', function() {
-      var rect = qs.getBoundingClientRect();
-      var offset = -rect.top * 0.25;
-      qs.style.backgroundPosition = 'center calc(30% + ' + offset + 'px)';
-    }, { passive: true });
-  }
+  var isMobile = /iP(hone|ad|od)|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+  var targets = [
+    { el: document.querySelector('.quote-section'), basePos: 'center 30%', rate: 0.25 },
+    { el: document.querySelector('.benefits'),      basePos: 'center 40%', rate: 0.2  }
+  ];
+  targets.forEach(function(t) {
+    if (!t.el) return;
+    if (isMobile) {
+      t.el.style.backgroundAttachment = 'scroll';
+      t.el.style.backgroundPosition   = t.basePos;
+    }
+  });
+  if (!isMobile) return;
+  window.addEventListener('scroll', function() {
+    targets.forEach(function(t) {
+      if (!t.el) return;
+      var rect   = t.el.getBoundingClientRect();
+      var offset = -rect.top * t.rate;
+      var base   = t.basePos.split(' ')[1];
+      t.el.style.backgroundPosition = 'center calc(' + base + ' + ' + offset + 'px)';
+    });
+  }, { passive: true });
 })();
 
 // 参加者の声タブ
