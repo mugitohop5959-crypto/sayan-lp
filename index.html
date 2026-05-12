@@ -390,10 +390,8 @@
       z-index: 3;
     }
 
-    .mini-sayan-wrap video {
-      width: 100%;
-      display: block;
-    }
+    .mini-sayan-wrap video  { display: none; }
+    .mini-sayan-wrap canvas { width: 100%; display: block; }
 
     @keyframes miniSayanWalk {
       0%, 100% { transform: translateY(0) scale(1); }
@@ -1227,10 +1225,10 @@
 <!-- ===== PROBLEMS ===== -->
 <section class="problems">
   <div class="mini-sayan-wrap">
-    <video autoplay muted loop playsinline>
-      <source src="mini-sayan.webm" type="video/webm">
+    <video class="sayan-vid" autoplay muted loop playsinline>
       <source src="mini-sayan.mp4" type="video/mp4">
     </video>
+    <canvas class="sayan-canvas"></canvas>
   </div>
   <div class="section-inner">
     <span class="section-label">こんなお悩みはありませんか？</span>
@@ -1767,6 +1765,44 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
       t.el.style.backgroundPosition = 'center calc(' + base + ' + ' + offset + 'px)';
     });
   }, { passive: true });
+})();
+
+// ミニさーやん リアルタイムクロマキー（全ブラウザ対応）
+(function() {
+  var vid    = document.querySelector('.sayan-vid');
+  var canvas = document.querySelector('.sayan-canvas');
+  if (!vid || !canvas) return;
+
+  // canvas内部解像度（540×1030の半分→表示はCSSで縮小）
+  var CW = 270, CH = 515;
+  canvas.width  = CW;
+  canvas.height = CH;
+
+  var ctx = canvas.getContext('2d', { willReadFrequently: true });
+  var raf;
+
+  function tick() {
+    if (!vid.paused && !vid.ended) {
+      // 元動画(720×1280)から人物部分だけ切り出してcanvasに描画
+      ctx.drawImage(vid, 80, 200, 540, 1030, 0, 0, CW, CH);
+      var img = ctx.getImageData(0, 0, CW, CH);
+      var d   = img.data;
+      for (var i = 0; i < d.length; i += 4) {
+        var r = d[i], g = d[i+1], b = d[i+2];
+        // 緑優勢ピクセルを透明に
+        if (g > 90 && g > r * 1.3 && g > b * 1.2) {
+          d[i+3] = 0;
+        }
+      }
+      ctx.putImageData(img, 0, 0);
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function start() { cancelAnimationFrame(raf); tick(); }
+
+  vid.addEventListener('playing', start);
+  vid.play().catch(function() {});
 })();
 
 // 参加者の声タブ
