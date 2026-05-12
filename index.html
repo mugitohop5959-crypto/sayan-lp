@@ -380,34 +380,6 @@
     /* ===== PROBLEMS ===== */
     .problems { background: var(--white); position: relative; }
 
-    .mini-sayan-wrap {
-      position: absolute;
-      right: 28px;
-      top: 36px;
-      width: 108px;
-      height: 108px;
-      border-radius: 50%;
-      overflow: hidden;
-      animation: miniSayanWalk 1.8s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 3;
-      box-shadow: 0 4px 18px rgba(57,197,134,0.35), 0 0 0 3px rgba(57,197,134,0.4);
-    }
-
-    .mini-sayan-wrap video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center 18%;
-    }
-
-    @keyframes miniSayanWalk {
-      0%, 100% { transform: translateY(0) scale(1); }
-      25%       { transform: translateY(-7px) scale(1.02); }
-      75%       { transform: translateY(-3px) scale(1.01); }
-    }
-
     .problems-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1130,8 +1102,6 @@
 
       .hero-inner { padding: 0 20px; }
 
-      /* mini-sayan: モバイルで少し小さく・位置を上に */
-      .mini-sayan-wrap { width: 82px; height: 82px; right: 12px; top: 20px; }
 
       /* quote-grid のみ1列に（problems/benefitsは2列維持） */
       .quote-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -1180,8 +1150,6 @@
       .problems-grid,
       .benefits-grid { grid-template-columns: 1fr; gap: 14px; }
 
-      /* mini-sayan: さらに小さく */
-      .mini-sayan-wrap { width: 64px; height: 64px; right: 8px; top: 14px; }
 
       /* 問題カード */
       .problem-card { padding: 24px 20px; }
@@ -1232,11 +1200,6 @@
 
 <!-- ===== PROBLEMS ===== -->
 <section class="problems">
-  <div class="mini-sayan-wrap">
-    <video autoplay muted loop playsinline>
-      <source src="mini-sayan.mp4" type="video/mp4">
-    </video>
-  </div>
   <div class="section-inner">
     <span class="section-label">こんなお悩みはありませんか？</span>
     <div class="divider"></div>
