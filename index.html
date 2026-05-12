@@ -383,16 +383,16 @@
     /* ミニさーやん 行進レーン */
     .mini-sayan-stage {
       position: relative;
-      height: 180px;
+      height: 230px;
       overflow: hidden;
-      margin: 4px 0 8px;
+      margin: 2px 0 4px;
     }
 
     .mini-sayan-wrap {
       position: absolute;
       bottom: 0;
       left: 100%;
-      width: 120px;
+      width: 155px;
       pointer-events: none;
       animation: miniSayanMarch 10s linear infinite;
     }
@@ -408,7 +408,7 @@
 
     @keyframes miniSayanMarch {
       from { transform: translateX(10px); }
-      to   { transform: translateX(calc(-100% - 100vw)); }
+      to   { transform: translateX(var(--march-end-x, calc(-100% - 100vw))); }
     }
 
     .problems-grid {
@@ -1785,13 +1785,15 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
   var wrap   = document.querySelector('.mini-sayan-wrap');
   if (!vid || !canvas || !stage || !wrap) return;
 
-  // 画面幅に関係なく一定の「歩く速さ」になるよう duration を動的に設定
+  // 画面幅に関係なく一定の「歩く速さ」＆ループ間隔を最小にするよう duration＋終点を動的に設定
   function setMarchSpeed() {
     var stageW  = stage.offsetWidth;
-    var charW   = wrap.offsetWidth || 88;
-    var travel  = stageW + charW + 20; // 右端〜左端の移動距離(px)
-    var speed   = window.innerWidth >= 768 ? 55 : 65; // PC: 55px/s、スマホ: ゆっくり65px/s
+    var charW   = wrap.offsetWidth || 155;
+    var travel  = stageW + charW + 20; // 右端〜左端ぴったりの移動距離(px)
+    var speed   = window.innerWidth >= 768 ? 55 : 65; // PC: 55px/s、スマホ: 65px/s
     wrap.style.animationDuration = (travel / speed).toFixed(1) + 's';
+    // 終点をステージ幅に合わせることでループの空白時間をゼロにする
+    wrap.style.setProperty('--march-end-x', (-travel) + 'px');
   }
   setMarchSpeed();
   window.addEventListener('resize', setMarchSpeed);
