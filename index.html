@@ -865,6 +865,9 @@
       margin-bottom: 20px;
     }
 
+    /* スマホのみ表示する改行 */
+    .sp-only { display: none; }
+
     .price-title {
       font-size: clamp(0.95rem, 2.8vw, 1.3rem);
       font-weight: 900;
@@ -1215,6 +1218,7 @@
       /* 料金カード */
       .price-card { padding: 28px 16px; }
       .price-title { font-size: clamp(0.88rem, 4.2vw, 1.05rem); }
+      .sp-only { display: inline; }
       .price-features li { font-size: clamp(0.76rem, 3.4vw, 0.86rem); }
 
       /* ボタン */
@@ -1594,14 +1598,14 @@
     </p>
     <div class="price-card">
       <span class="price-badge">研修プログラム</span>
-      <h3 class="price-title">「うまくやらなきゃ」から<wbr>「やってみたい！」へ<br>表現✕コミュニケーション研修</h3>
+      <h3 class="price-title">「うまくやらなきゃ」から<br class="sp-only">「やってみたい！」へ<br>表現✕コミュニケーション研修</h3>
       <p class="price-format">1回から年間サポートまで対応 ｜ 対象：保育者</p>
       <ul class="price-features">
         <li>表現あそび・おはなしあそび・劇あそび</li>
         <li>表現あそび研修・メンタルヘルス研修</li>
         <li>単発1回からご依頼可能</li>
         <li>年間を通じた継続サポートにも対応</li>
-        <li>園のねらい・状況に合わせた、<wbr>オリジナルプログラムのご提案</li>
+        <li>園のねらい・状況に合わせた、<br class="sp-only">オリジナルプログラムのご提案</li>
       </ul>
       <a href="https://forms.gle/2c59JJ9YRrjYDro39" target="_blank" rel="noopener" class="btn-cta">お問い合わせ・ご相談はこちら</a>
     </div>
