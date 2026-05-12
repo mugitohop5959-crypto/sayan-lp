@@ -378,7 +378,28 @@
     }
 
     /* ===== PROBLEMS ===== */
-    .problems { background: var(--white); }
+    .problems { background: var(--white); position: relative; }
+
+    .mini-sayan-wrap {
+      position: absolute;
+      right: 24px;
+      top: 40px;
+      width: 110px;
+      animation: miniSayanBounce 1.6s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .mini-sayan-wrap video {
+      width: 100%;
+      mix-blend-mode: screen;
+      display: block;
+    }
+
+    @keyframes miniSayanBounce {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%       { transform: translateY(-12px) rotate(3deg); }
+    }
 
     .problems-grid {
       display: grid;
@@ -1149,6 +1170,11 @@
 
 <!-- ===== PROBLEMS ===== -->
 <section class="problems">
+  <div class="mini-sayan-wrap">
+    <video autoplay muted loop playsinline>
+      <source src="mini-sayan.mp4" type="video/mp4">
+    </video>
+  </div>
   <div class="section-inner">
     <span class="section-label">こんなお悩みはありませんか？</span>
     <div class="divider"></div>
