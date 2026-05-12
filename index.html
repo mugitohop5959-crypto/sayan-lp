@@ -158,9 +158,9 @@
     }
 
     .hero-catchcopy .marker-line {
-      display: inline;
+      display: inline-block;
       position: relative;
-      padding-bottom: 4px;
+      padding-bottom: 6px;
     }
 
     .hero-catchcopy .marker-line::after {
@@ -955,27 +955,40 @@
 
     .profile-image-wrap {
       position: relative;
+      padding: 8px;
     }
 
+    /* 背景グロー */
+    .profile-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(62,193,201,0.18) 0%, rgba(57,197,134,0.12) 50%, transparent 75%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* グラデーションフレーム */
     .profile-image-wrap::after {
       content: '';
       position: absolute;
-      bottom: -12px; right: -12px;
-      width: 100%; height: 100%;
-      border-radius: 24px;
-      background: linear-gradient(135deg, var(--green-light), var(--teal-light));
+      inset: 0;
+      border-radius: 28px;
+      background: linear-gradient(145deg, var(--green-primary), var(--teal), var(--orange-light));
       z-index: 0;
     }
 
     .profile-image-wrap img {
       width: 100%;
-      border-radius: 24px;
+      border-radius: 22px;
       object-fit: cover;
       object-position: top;
       aspect-ratio: 3/4;
       position: relative;
       z-index: 1;
       display: block;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.18), 0 8px 24px rgba(0,0,0,0.1);
     }
 
     .profile-content .section-label { color: var(--green-dark); }
@@ -996,20 +1009,33 @@
     }
 
     .profile-insta-btn {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-      color: #fff;
+      gap: 8px;
+      background: #fff;
+      color: #d6336c;
       font-size: 0.82rem;
       font-weight: 700;
-      padding: 8px 18px;
+      padding: 9px 22px;
       border-radius: 30px;
       text-decoration: none;
       margin-bottom: 24px;
-      transition: opacity 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 0;
     }
-    .profile-insta-btn:hover { opacity: 0.85; }
+    .profile-insta-btn::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 32px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      z-index: -1;
+    }
+    .profile-insta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(220,39,67,0.25);
+    }
 
     .profile-text {
       font-size: 0.92rem;
@@ -1232,7 +1258,7 @@
     <span class="hero-badge-label">保育者のための</span>
     <span class="hero-badge">表現 × コミュニケーション研修</span>
     <h1 class="hero-title">さーやんの園内研修</h1>
-    <p class="hero-catchcopy"><span class="marker-line">子どもの「やってみたい！」が動き出す保育へ</span></p>
+    <p class="hero-catchcopy"><span class="marker-line">子どもの「やってみたい！」が</span><span class="marker-line delay">動き出す保育へ</span></p>
     <p class="hero-sub">
       「受け取り」「伝える」楽しさから始まる、表現あそびとコミュニケーションを、職場の皆さんとご一緒に体験してみませんか
     </p>
@@ -1340,7 +1366,7 @@
   <div class="section-inner">
     <span class="section-label">研修内容について</span>
     <div class="divider"></div>
-    <h2 class="section-title">「受け取り」「伝える」ことを楽しんでみませんか</h2>
+    <h2 class="section-title"><span class="title-pop">「表現」はコミュニケーション</span><br><br>「受け取り」「伝える」ことを楽しんでみませんか</h2>
     <p class="section-desc">
       1回の研修から、年間を通じた継続的なサポートまで。園の状況やご要望に合わせて、柔軟にプログラムをご提案します。
     </p>
