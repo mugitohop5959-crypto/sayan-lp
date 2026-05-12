@@ -400,6 +400,12 @@
     .mini-sayan-wrap video  { display: none; }
     .mini-sayan-wrap canvas { width: 100%; display: block; }
 
+    /* PC: ミニさーやんを大きく */
+    @media (min-width: 769px) {
+      .mini-sayan-wrap { width: 130px; }
+      .mini-sayan-stage { height: 200px; }
+    }
+
     @keyframes miniSayanMarch {
       from { transform: translateX(10px); }
       to   { transform: translateX(calc(-100% - 100vw)); }
@@ -1229,6 +1235,11 @@
   <div class="section-inner">
     <span class="section-label">こんなお悩みはありませんか？</span>
     <div class="divider"></div>
+    <h2 class="section-title">子どもたちの<br>自由な表現を引き出したい！<br>でも<br>どうしたらいいのか わからない</h2>
+    <p class="section-desc">
+      保育の中で「絵画」や「造形」は楽しめるけれど、発表会や劇あそびの季節になると、どこかモヤモヤする気持ちを抱えていませんか？<br><br>
+      そのお悩み、あなた一人ではありません。
+    </p>
     <div class="mini-sayan-stage">
       <div class="mini-sayan-wrap">
         <video class="sayan-vid" autoplay muted loop playsinline>
@@ -1237,11 +1248,6 @@
         <canvas class="sayan-canvas"></canvas>
       </div>
     </div>
-    <h2 class="section-title">子どもたちの<br>自由な表現を引き出したい！<br>でも<br>どうしたらいいのか わからない</h2>
-    <p class="section-desc">
-      保育の中で「絵画」や「造形」は楽しめるけれど、発表会や劇あそびの季節になると、どこかモヤモヤする気持ちを抱えていませんか？<br><br>
-      そのお悩み、あなた一人ではありません。
-    </p>
     <div class="problems-grid">
       <div class="problem-card">
         <div class="problem-num">01</div>
@@ -1784,14 +1790,14 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
     var stageW  = stage.offsetWidth;
     var charW   = wrap.offsetWidth || 88;
     var travel  = stageW + charW + 20; // 右端〜左端の移動距離(px)
-    var speed   = 90;                  // px/秒（歩く速さ）
+    var speed   = window.innerWidth >= 768 ? 55 : 90; // PC: ゆっくり 55px/s、スマホ: 90px/s
     wrap.style.animationDuration = (travel / speed).toFixed(1) + 's';
   }
   setMarchSpeed();
   window.addEventListener('resize', setMarchSpeed);
 
-  // canvas内部解像度（540×1030の半分）
-  var CW = 270, CH = 515;
+  // canvas内部解像度（720×1030を半分にスケール）
+  var CW = 270, CH = 386;  // 270 × (1030/720) ≈ 386
   canvas.width  = CW;
   canvas.height = CH;
 
@@ -1800,8 +1806,8 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
 
   function tick() {
     if (!vid.paused && !vid.ended) {
-      // 元動画(720×1280)から人物部分だけ切り出し
-      ctx.drawImage(vid, 80, 200, 540, 1030, 0, 0, CW, CH);
+      // 元動画(720×1280)から全幅で人物部分を切り出し（手先がはみ出ないよう左端から）
+      ctx.drawImage(vid, 0, 200, 720, 1030, 0, 0, CW, CH);
       var img = ctx.getImageData(0, 0, CW, CH);
       var d   = img.data;
       for (var i = 0; i < d.length; i += 4) {
