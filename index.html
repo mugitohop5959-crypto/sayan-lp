@@ -1771,13 +1771,26 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
   }, { passive: true });
 })();
 
-// ミニさーやん リアルタイムクロマキー（全ブラウザ対応）
+// ミニさーやん リアルタイムクロマキー＋行進速度の自動調整（全ブラウザ対応）
 (function() {
   var vid    = document.querySelector('.sayan-vid');
   var canvas = document.querySelector('.sayan-canvas');
-  if (!vid || !canvas) return;
+  var stage  = document.querySelector('.mini-sayan-stage');
+  var wrap   = document.querySelector('.mini-sayan-wrap');
+  if (!vid || !canvas || !stage || !wrap) return;
 
-  // canvas内部解像度（540×1030の半分→表示はCSSで縮小）
+  // 画面幅に関係なく一定の「歩く速さ」になるよう duration を動的に設定
+  function setMarchSpeed() {
+    var stageW  = stage.offsetWidth;
+    var charW   = wrap.offsetWidth || 88;
+    var travel  = stageW + charW + 20; // 右端〜左端の移動距離(px)
+    var speed   = 90;                  // px/秒（歩く速さ）
+    wrap.style.animationDuration = (travel / speed).toFixed(1) + 's';
+  }
+  setMarchSpeed();
+  window.addEventListener('resize', setMarchSpeed);
+
+  // canvas内部解像度（540×1030の半分）
   var CW = 270, CH = 515;
   canvas.width  = CW;
   canvas.height = CH;
@@ -1787,7 +1800,7 @@ document.querySelectorAll('.pillar-photos').forEach(function(el) {
 
   function tick() {
     if (!vid.paused && !vid.ended) {
-      // 元動画(720×1280)から人物部分だけ切り出してcanvasに描画
+      // 元動画(720×1280)から人物部分だけ切り出し
       ctx.drawImage(vid, 80, 200, 540, 1030, 0, 0, CW, CH);
       var img = ctx.getImageData(0, 0, CW, CH);
       var d   = img.data;
